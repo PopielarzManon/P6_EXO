@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+const userRoutes = require('./routes/user');
+
 const stuffRoutes = require('./routes/stuff');
 
 // init express
@@ -15,6 +18,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 mongoose.connect('mongodb+srv://user_01:vytalu1058@cluster0.keawd.mongodb.net/Cluster0?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -23,3 +27,4 @@ mongoose.connect('mongodb+srv://user_01:vytalu1058@cluster0.keawd.mongodb.net/Cl
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
   module.exports = app;
+ 
