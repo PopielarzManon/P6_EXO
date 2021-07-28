@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const userRoutes = require('./routes/user');
-
+const path = require('path');
 const stuffRoutes = require('./routes/stuff');
+
+
 
 // init express
 const app = express();
@@ -19,6 +21,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 mongoose.connect('mongodb+srv://user_01:vytalu1058@cluster0.keawd.mongodb.net/Cluster0?retryWrites=true&w=majority',
   { useNewUrlParser: true,
